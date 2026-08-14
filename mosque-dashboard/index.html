@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moschee Finanzen Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        
+        <!-- الهيدر الثابت: اسم المسجد، الوقت، حالة البيانات -->
+        <header class="main-header">
+            <div class="mosque-info">
+                <span class="mosque-logo">🕌</span>
+                <span class="mosque-name">Al-Rahman Moschee</span>
+            </div>
+            <div class="status-clock-group">
+                <div class="status-indicator">
+                    <span class="indicator-dot active"></span>
+                    <span class="status-text">Daten aktuell</span>
+                </div>
+                <div id="live-clock" class="live-clock">00:00:00</div>
+            </div>
+        </header>
+
+        <!-- منطقة العرض الرئيسية (الشرائح) -->
+        <main class="slides-container">
+            
+            <!-- الشريحة 1: الوضع المالي العام -->
+            <section class="slide active" id="slide-overview">
+                <div class="slide-content">
+                    <h2 class="slide-title">Finanzielle Übersicht</h2>
+                    
+                    <div class="balance-card">
+                        <span class="card-label">Aktueller Kontostand</span>
+                        <div class="balance-amount">12.840,00 €</div>
+                    </div>
+
+                    <div class="summary-grid">
+                        <div class="summary-card income">
+                            <span class="card-label">Einnahmen (Diesen Monat)</span>
+                            <div class="summary-amount">+ 4.250,00 €</div>
+                        </div>
+                        <div class="summary-card expense">
+                            <span class="card-label">Ausgaben (Diesen Monat)</span>
+                            <div class="summary-amount">- 2.870,00 €</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- الشريحة 2: تفاصيل المصروفات -->
+            <section class="slide" id="slide-expenses">
+                <div class="slide-content">
+                    <h2 class="slide-title">Ausgaben diesen Monat</h2>
+                    
+                    <div class="expense-list">
+                        <div class="expense-item">
+                            <div class="expense-info">
+                                <span class="expense-category">Gebäude (Miete / Instandhaltung)</span>
+                                <span class="expense-value">1.570,00 €</span>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" style="width: 55%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="expense-item">
+                            <div class="expense-info">
+                                <span class="expense-category">Strom & Heizung</span>
+                                <span class="expense-value">820,00 €</span>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" style="width: 28%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="expense-item">
+                            <div class="expense-info">
+                                <span class="expense-category">Reinigung & Hygiene</span>
+                                <span class="expense-value">320,00 €</span>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" style="width: 11%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="expense-item">
+                            <div class="expense-info">
+                                <span class="expense-category">Bildung & Aktivitäten</span>
+                                <span class="expense-value">160,00 €</span>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" style="width: 6%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- الشريحة 3: المشاريع الحالية -->
+            <section class="slide" id="slide-projects">
+                <div class="slide-content">
+                    <h2 class="slide-title">Aktuelle Projekte</h2>
+                    
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-name">Klimaanlage für den Gebetsraum</h3>
+                            <span class="project-percentage">73.5%</span>
+                        </div>
+                        
+                        <div class="project-progress-container">
+                            <div class="project-progress-bar" style="width: 73.5%;"></div>
+                        </div>
+
+                        <div class="project-details">
+                            <div class="project-detail-item">
+                                <span class="detail-label">Gesammelt</span>
+                                <span class="detail-val accent">7.350,00 €</span>
+                            </div>
+                            <div class="project-detail-item">
+                                <span class="detail-label">Zielbetrag</span>
+                                <span class="detail-val">10.000,00 €</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- الفوتر الثابت: تاريخ التحديث والإشارة إلى الشفافية -->
+        <footer class="main-footer">
+            <div class="update-info">
+                <span>Stand: 13.08.2026 15:05</span>
+            </div>
+            <div class="transparency-note">
+                <span>Transparenz schafft Vertrauen</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

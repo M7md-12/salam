@@ -1,0 +1,364 @@
+/* إعادة تهيئة المتغيرات الأساسية لدعم الشاشات المختلفة */
+:root {
+    --bg-color: #121413;       /* خلفية داكنة مريحة للعين */
+    --card-bg: #1a1e1c;        /* خلفية العناصر */
+    --text-primary: #f5f5f5;   /* نص رئيسي أبيض ناصع */
+    --text-secondary: #a0a5a2; /* نص فرعي رمادي */
+    --accent-green: #2e7d32;   /* أخضر هادئ */
+    --accent-red: #c62828;     /* أحمر هادئ */
+    --accent-gold: #c5a059;    /* لون ذهبي خافت للمشاريع */
+    --border-color: #2c322f;
+
+    /* استخدام clamp لجعل الخطوط مرنة تلقائيًا بين الموبايل والتلفزيون */
+    --font-size-base: clamp(14px, 1.2vw, 24px);
+    --font-size-large: clamp(24px, 2.5vw, 48px);
+    --font-size-huge: clamp(36px, 4.5vw, 96px);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: var(--font-size-base);
+    line-height: 1.5;
+    height: 100vh;
+    overflow: hidden; /* لمنع أي سحب أو سكرول غير مرغوب على شاشات العرض */
+}
+
+/* الحاوية الأساسية تأخذ كامل الشاشة لتناسب التلفزيون */
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    padding: 2.5vh 4vw; /* استخدام vh و vw للهوامش */
+}
+
+/* الهيدر */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 2vh;
+}
+
+.mosque-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.mosque-logo {
+    font-size: clamp(20px, 2vw, 40px);
+}
+
+.mosque-name {
+    font-weight: 600;
+    font-size: clamp(18px, 1.8vw, 36px);
+    letter-spacing: 0.5px;
+}
+
+.status-clock-group {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #1e2521;
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1px solid #2e3b33;
+}
+
+.indicator-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #555;
+}
+
+.indicator-dot.active {
+    background-color: #4caf50;
+    box-shadow: 0 0 8px #4caf50;
+}
+
+.status-text {
+    font-size: clamp(11px, 0.9vw, 18px);
+    color: var(--text-secondary);
+}
+
+.live-clock {
+    font-family: monospace;
+    font-size: clamp(18px, 1.8vw, 36px);
+    font-weight: bold;
+    color: var(--text-primary);
+}
+
+/* منطقة الشرائح */
+.slides-container {
+    position: relative;
+    flex-grow: 1;
+    margin: 4vh 0;
+}
+
+/* تأثير التلاشي الهادئ عند تغيير الشرائح */
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1.5s ease-in-out, visibility 1.5s ease-in-out;
+    display: flex;
+    align-items: center;
+}
+
+.slide.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.slide-content {
+    width: 100%;
+}
+
+.slide-title {
+    font-size: clamp(20px, 2.2vw, 44px);
+    color: var(--text-secondary);
+    margin-bottom: 3vh;
+    font-weight: 400;
+}
+
+/* كروت العرض */
+.balance-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 4vh 4vw;
+    margin-bottom: 3vh;
+    text-align: left;
+}
+
+.card-label {
+    font-size: clamp(14px, 1.1vw, 22px);
+    color: var(--text-secondary);
+    display: block;
+    margin-bottom: 1vh;
+}
+
+.balance-amount {
+    font-size: var(--font-size-huge);
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+/* شبكة الإيرادات والمصروفات */
+.summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3vw;
+}
+
+.summary-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 3vh 3vw;
+}
+
+.summary-amount {
+    font-size: var(--font-size-large);
+    font-weight: 700;
+}
+
+.summary-card.income .summary-amount {
+    color: var(--accent-green);
+}
+
+.summary-card.expense .summary-amount {
+    color: var(--text-primary); /* لتجنب الألوان الحادة جدًا، جعلنا المصروفات بيضاء عادية أو رمادية داكنة */
+}
+
+/* قائمة المصروفات */
+.expense-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+}
+
+.expense-item {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 2vh 3vw;
+    border-radius: 12px;
+}
+
+.expense-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: clamp(16px, 1.5vw, 28px);
+    font-weight: 500;
+    margin-bottom: 1vh;
+}
+
+.expense-value {
+    font-weight: 700;
+}
+
+.progress-bar-container {
+    background-color: #2c322f;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    background-color: var(--accent-green);
+    height: 100%;
+    border-radius: 4px;
+}
+
+/* كارت المشاريع */
+.project-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 5vh 4vw;
+    border-radius: 16px;
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3vh;
+}
+
+.project-name {
+    font-size: clamp(20px, 2.2vw, 44px);
+    font-weight: 600;
+}
+
+.project-percentage {
+    font-size: var(--font-size-large);
+    font-weight: 700;
+    color: var(--accent-gold);
+}
+
+.project-progress-container {
+    background-color: #2c322f;
+    height: 16px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 4vh;
+}
+
+.project-progress-bar {
+    background-color: var(--accent-gold);
+    height: 100%;
+    border-radius: 8px;
+}
+
+.project-details {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid var(--border-color);
+    padding-top: 3vh;
+}
+
+.project-detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.detail-label {
+    font-size: clamp(14px, 1.1vw, 22px);
+    color: var(--text-secondary);
+}
+
+.detail-val {
+    font-size: var(--font-size-large);
+    font-weight: 700;
+}
+
+.detail-val.accent {
+    color: var(--accent-gold);
+}
+
+/* الفوتر */
+.main-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 2px solid var(--border-color);
+    padding-top: 2vh;
+    font-size: clamp(12px, 1vw, 20px);
+    color: var(--text-secondary);
+}
+
+/* دعم شاشات الهواتف المحمولة Portrait */
+@media (max-width: 768px) {
+    .dashboard-container {
+        height: auto;
+        min-height: 100vh;
+        overflow-y: auto;
+        padding: 20px 15px;
+    }
+
+    body {
+        overflow: auto;
+    }
+
+    .main-header, .main-footer {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .status-clock-group {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .slides-container {
+        position: relative;
+        height: auto;
+        min-height: 480px;
+        margin: 20px 0;
+    }
+
+    .slide {
+        position: relative;
+        opacity: 0;
+        display: none;
+    }
+
+    .slide.active {
+        opacity: 1;
+        display: block;
+    }
+
+    .summary-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .project-details {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
